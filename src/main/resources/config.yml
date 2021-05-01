@@ -1,0 +1,14 @@
+#######################
+#  [STORAGE METHOD]   #
+#######################
+# Specify here what kind of storage type would you like to use:
+# Supported types: FILE, MONGODB, SQL, REDIS
+storage: FILE
+
+# If you want to use a database as your storage
+# make sure to configure all the credentials.
+# Set them properly here below.
+host: localhost
+database: admin
+port: 3303
+password: "admin"
