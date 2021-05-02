@@ -9,7 +9,8 @@ import com.mongodb.client.model.UpdateOptions
 import me.marcusslover.fishingplus.FishingPlus
 import me.marcusslover.fishingplus.fisher.Fisher
 import me.marcusslover.fishingplus.storage.AbstractStorage
-import me.marcusslover.fishingplus.storage.StorageCenter.*
+import me.marcusslover.fishingplus.storage.StorageCenter.Credential
+import me.marcusslover.fishingplus.storage.StorageCenter.Type
 import org.bson.Document
 import java.util.*
 
