@@ -1,4 +1,4 @@
 package me.marcusslover.fishingplus.exception
 
-class InvalidCredentialException : CredentialException() {
+class InvalidCredentialException(string: String) : CredentialException(string) {
 }

@@ -1,4 +1,4 @@
 package me.marcusslover.fishingplus.exception
 
-open class CredentialException : Exception() {
+open class CredentialException(val string: String) : Exception(string) {
 }

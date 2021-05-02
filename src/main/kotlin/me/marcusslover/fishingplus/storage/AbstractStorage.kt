@@ -2,6 +2,7 @@ package me.marcusslover.fishingplus.storage
 
 import com.google.gson.JsonObject
 import me.marcusslover.fishingplus.FishingPlus
+import me.marcusslover.fishingplus.exception.InvalidCredentialException
 import me.marcusslover.fishingplus.fisher.Fisher
 import me.marcusslover.fishingplus.storage.StorageCenter.Type
 import me.marcusslover.fishingplus.utils.JsonUtil
@@ -14,7 +15,7 @@ abstract class AbstractStorage(protected val plugin: FishingPlus, private val ty
 
     protected fun <T> validate(obj: T?, name: String): T {
         // Escape from unchecked casting
-        if (obj == null) throw NullPointerException("$name cannot be null")
+        if (obj == null) throw InvalidCredentialException("$name cannot be null")
         return obj
     }
 
