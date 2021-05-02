@@ -1,11 +1,9 @@
 package me.marcusslover.fishingplus.utils
 
-import java.util.*
-import java.util.function.Predicate
-
-interface IHandler<T> {
+/**
+ * Handles elements of the holder.
+ */
+interface IHandler<T> : IHolder<T> {
     fun add(element: T)
     fun remove(element: T)
-    fun find(predicate: Predicate<in T>): Optional<T>
-    fun all(): MutableList<T>
 }
