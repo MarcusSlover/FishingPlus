@@ -4,6 +4,9 @@ import com.google.gson.*
 import java.lang.reflect.Type
 import java.util.*
 
+/**
+ * Responsible for serialization and deserialization of the Fisher data class.
+ */
 class FisherSerializer : JsonSerializer<Fisher>, JsonDeserializer<Fisher> {
     override fun serialize(fisher: Fisher, type: Type, context: JsonSerializationContext): JsonElement {
         val json = JsonObject()

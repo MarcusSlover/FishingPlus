@@ -9,22 +9,16 @@ import java.util.*
 import java.util.function.Consumer
 import java.util.function.Predicate
 
+/**
+ * Keeps track of all the loaded Fisher objects.
+ * As well as, controls the process of saving and loading them.
+ */
 class FisherHandler : IHandler<Fisher> {
-    companion object Instance : IStaticInstance<FisherHandler> {
-        @JvmStatic
-        private lateinit var instance: FisherHandler
-
-        @JvmStatic
-        override fun get(): FisherHandler {
-            return instance
-        }
-    }
-
-    private var data: AbstractStorage
+    private var data: AbstractStorage // Storage
     private val list: MutableList<Fisher> = ArrayList()
 
     init {
-        instance = this
+        instance = this // Initialize the instance
         data = StorageCenter.get().data
     }
 
@@ -61,6 +55,17 @@ class FisherHandler : IHandler<Fisher> {
                     consumer.accept(true)
                 }
             }
+        }
+    }
+
+    // Instance
+    companion object Instance : IStaticInstance<FisherHandler> {
+        @JvmStatic
+        private lateinit var instance: FisherHandler
+
+        @JvmStatic
+        override fun get(): FisherHandler {
+            return instance
         }
     }
 

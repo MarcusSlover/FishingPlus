@@ -11,37 +11,41 @@ import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
 class FishingPlus : JavaPlugin() {
-    companion object Instance : IStaticInstance<FishingPlus> {
-        @JvmStatic
-        private lateinit var instance: FishingPlus
 
-        @JvmStatic
-        override fun get(): FishingPlus {
-            return instance
-        }
-    }
+    lateinit var data: File // Data directory
 
-    val pluginManager = Bukkit.getPluginManager()
-    val storageCenter = StorageCenter()
-    val data = File(dataFolder, "storage")
-
+    /**
+     * When the plugin loads.
+     */
     override fun onLoad() {
-        instance = this
+        instance = this // Initialize the instance
     }
 
+    /**
+     * When the plugin enables.
+     */
     override fun onEnable() {
-        if (!dataFolder.exists()) {
-            dataFolder.mkdirs()
-            logger.info("Created the data folder!")
-        }
-        // Config
-        saveDefaultConfig()
+        initializeFiles()
+        initializeStorage()
+        initializeListeners()
+    }
 
-        // Data directory
-        if (!data.exists()) data.mkdirs()
+    // Event handlers
+    private fun initializeListeners() {
+        addListener(ServerListener())
+        addListener(FishingListener())
+    }
 
+    private fun addListener(listener: Listener) {
+        val pluginManager = Bukkit.getPluginManager()
+        pluginManager.registerEvents(listener, this)
+    }
+
+    // Storage
+    private fun initializeStorage() {
         val storageType: String? = config.getString("storage", "FILE")
         var state = StorageCenter.State.INVALID
+        val storageCenter = StorageCenter()
 
         if (storageType != null) {
             val type = StorageCenter.Type.find(storageType)
@@ -72,15 +76,32 @@ class FishingPlus : JavaPlugin() {
 
         if (state == StorageCenter.State.INVALID) {
             logger.warning("Could not recognize the \"$storageType\" storage type!")
-            this.isEnabled = false
-            return
+            isEnabled = false
         }
-
-        addListener(ServerListener())
-        addListener(FishingListener())
     }
 
-    private fun addListener(listener: Listener) {
-        pluginManager.registerEvents(listener, this)
+    // Files
+    private fun initializeFiles() {
+        if (!dataFolder.exists()) {
+            dataFolder.mkdirs()
+            logger.info("Created the data folder!")
+        }
+        // Config
+        saveDefaultConfig()
+
+        // Data directory
+        data = File(dataFolder, "storage")
+        if (!data.exists()) data.mkdirs()
+    }
+
+    // Instance
+    companion object Instance : IStaticInstance<FishingPlus> {
+        @JvmStatic
+        private lateinit var instance: FishingPlus
+
+        @JvmStatic
+        override fun get(): FishingPlus {
+            return instance
+        }
     }
 }
