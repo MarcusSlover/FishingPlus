@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021.
+ * Under GNU General Public License v3.0.
+ */
+
 package me.marcusslover.fishingplus
 
 import me.marcusslover.fishingplus.exception.StorageException
@@ -19,6 +24,12 @@ class FishingPlus : JavaPlugin() {
      */
     override fun onLoad() {
         instance = this // Initialize the instance
+        initializeContent()
+    }
+
+    // Fishing content
+    private fun initializeContent() {
+
     }
 
     /**

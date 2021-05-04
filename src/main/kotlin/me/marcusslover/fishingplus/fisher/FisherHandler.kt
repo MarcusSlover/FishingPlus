@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021.
+ * Under GNU General Public License v3.0.
+ */
+
 package me.marcusslover.fishingplus.fisher
 
 import me.marcusslover.fishingplus.storage.AbstractStorage
